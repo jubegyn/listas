@@ -1,5 +1,6 @@
 <!doctype html>
 <html ng-app>
+
 <head>
     <meta charset="UTF-8">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script> -->
@@ -7,19 +8,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid jumbotron">
         <div class="row">
             <div class="col-sm-12">
                 <form class="form-horizontal ng-pristine ng-valid">
                     <div class="form-group">
                         <div class="col-md-6">
                             <label class="col-md-6">Texto A</label>
-                            <textarea class="form-control"  id="texta" rows="7"></textarea>
+                            <textarea class="form-control" id="texta" rows="5"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="col-md-6">Texto B</label>
-                            <textarea class="form-control"  id="textb" rows="7"></textarea>
+                            <textarea class="form-control" id="textb" rows="5"></textarea>
                         </div>
                     </div>
                 </form>
@@ -30,130 +32,154 @@
                 <label class="control-label">Separador</label>
                 <div class="radio-list">
                     <label class="radio-inline">
-                    <div class="radio radio-info">
-                        <input name="radio" id="radio1" value="enter" checked="" type="radio">
-                        <label for="radio1">Enter (/n)</label>
-                    </div>
+                        <div class="radio radio-info">
+                            <label>
+                                <input name="radio" id="radio1" value="enter" checked="" type="radio">
+                                Enter (/n)
+                            </label>
+                        </div>
                     </label>
                     <label class="radio-inline">
-                    <div class="radio radio-info">
-                        <input name="radio" id="radio2" value="virgula" type="radio">
-                        <label for="radio2">Virgula (,)</label>
-                    </div>
+                        <div class="radio radio-info">
+                            <label>
+                                <input name="radio" id="radio2" value="virgula" type="radio">
+                                Virgula (,)
+                            </label>
+                        </div>
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-3 col-md-9">
-                <button class="btn btn-success" id="botao"> <i class="fa fa-check"></i> Contabilizar</button>
-                <button class="btn btn-warning" id="limpar"> <i class="fa fa-check"></i> Limpar Resultados</button>
+            <div class="col-md-12" style="text-align: center">
+                <button class="btn btn-success" id="botao">
+                    <i class="fa fa-check"></i> Contabilizar</button>
+                <button class="btn btn-warning" id="limpar">
+                    <i class="fa fa-check"></i> Limpar Resultados</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <form class="form-horizontal ng-pristine ng-valid">
-                    <div class="form-group" id="resultado-form" >
+        <br />
+        <br />
+        <form class="form-horizontal ng-pristine ng-valid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group" id="resultado-form">
                         <div class="col-md-6">
                             <label class="col-md-6">Resultado só repetidos</label>
-                            <textarea class="form-control"  id="resultadoa" rows="7"></textarea>
+                            <textarea class="form-control" id="resultadoa" rows="5"></textarea>
                         </div>
                         <div class="col-md-6">
                             <label class="col-md-6">Resultado só únicos (diferentes)</label>
-                            <textarea class="form-control"  id="resultadob" rows="7"></textarea>
+                            <textarea class="form-control" id="resultadob" rows="5"></textarea>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group" id="resultado-Separado">
+                        <div class="col-md-6">
+                            <label class="col-md-6">Únicos A</label>
+                            <textarea class="form-control" id="unicosa" rows="3"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-6">Únicos B</label>
+                            <textarea class="form-control" id="unicosb" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
     <script type="text/javascript">
-        $('#limpar').click(function() {
-					$('#resultadoa').val('');
-					$('#resultadob').val('');
-				});
+        $('#limpar').click(function () {
+            $('#resultadoa').val('');
+            $('#resultadob').val('');
+        });
 
-        $('#botao').click(function() {
+        $('#botao').click(function () {
             var separador = "";
-            if($( "input:checked" ).val() == 'enter'){
+            if ($("input:checked").val() == 'enter') {
                 separador = "\n";
-            }else if($( "input:checked" ).val() == 'virgula'){
+            } else if ($("input:checked").val() == 'virgula') {
                 separador = ",";
             }
 
-            var strA = $( '#texta' ).val().trim();
+            var strA = $('#texta').val().trim();
             var vetorA = strA.split(separador);
-            var strB = $( '#textb' ).val().trim();
+            var strB = $('#textb').val().trim();
             var vetorB = strB.split(separador);
             var tem = false;
 
-						$('#resultadoa').val('');
-						$('#resultadob').val('');
+            $('#resultadoa').val('');
+            $('#resultadob').val('');
 
-						if(vetorA.length > 1 && vetorB.length > 1){
-							lacos(vetorA, vetorB);
-						}else{
-							alert("É necessário preencher os dois campos para comparar!");
-						}
+            if (vetorA.length > 1 && vetorB.length > 1) {
+                lacos(vetorA, vetorB);
+            } else {
+                alert("É necessário preencher os dois campos para comparar!");
+            }
         });
 
-        function lacos(vetorA, vetorB){
-					var resultadoa = [];
-					var resultadob = [];
+
+        function lacos(vetorA, vetorB) {
+            var resultadoa = [];
+            var resultadob = [];
 
             //pegar os DIFERENTES + os IGUAIS de A para B
-						$.each( vetorA, function( i, vala ) {
-								tem = false;
-								$.each( vetorB, function( y, valb ) {
-										if(vala == valb){
-											resultadoa.push(vala);
-												//$('#resultadoa').val($('#resultadoa').val() + vala + ", ");
-												tem = true;
-										}
-								});
-								if(!tem){
-									resultadob.push(vala);
-										//$('#resultadob').val($('#resultadob').val() + vala + ", ");
-								}
-						});
-
-            //pegar os diferentes de B para A
-            $.each( vetorB, function( i, vala ) {
+            $.each(vetorA, function (i, valor_A) {
                 tem = false;
-                $.each( vetorA, function( y, valb ) {
-                    if(vala == valb){
+                $.each(vetorB, function (y, valor_B) {
+                    if (valor_A == valor_B) {
+                        resultadoa.push(valor_A);
                         tem = true;
                     }
                 });
-                if(!tem){
-									resultadob.push(vala);
-                    //$('#resultadob').val($('#resultadob').val() + vala + ", ");
+                if (!tem) {
+                    resultadob.push(valor_A);
+                    $('#unicosa').val(resultadob);
                 }
             });
 
-						var uniqueA = [];
-						var uniqueB = [];
-						$.each(resultadoa, function(i, el){
-						    if($.inArray(el, uniqueA) === -1) uniqueA.push(el);
-						});
-						$.each(resultadob, function(i, el){
-						    if($.inArray(el, uniqueB) === -1) uniqueB.push(el);
-						});
+            var unicosb = [];
+            //pegar os diferentes de B para A
+            $.each(vetorB, function (i, valor_A) {
+                tem = false;
+                $.each(vetorA, function (y, valor_B) {
+                    if (valor_A == valor_B) {
+                        tem = true;
+                    }
+                });
+                if (!tem) {
+                    resultadob.push(valor_A);
+                    unicosb.push(valor_A);
+                    $('#unicosb').val(unicosb);
+                }
+            });
 
-						$.each(uniqueA, function(i, el){
-							$('#resultadoa').val($('#resultadoa').val() + el + ", ");
-							//$('#resultadoa').val(el + ", ");
-						});
-						$.each(uniqueB, function(i, el){
-							$('#resultadob').val($('#resultadob').val() + el + ", ");
-						});
+            var uniqueA = [];
+            var uniqueB = [];
+            $.each(resultadoa, function (i, el) {
+                if ($.inArray(el, uniqueA) === -1) uniqueA.push(el);
+            });
+            $.each(resultadob, function (i, el) {
+                if ($.inArray(el, uniqueB) === -1) uniqueB.push(el);
+            });
 
-						//limpar ultima virgula
-						$('#resultadoa').val($('#resultadoa').val().substr(0, $('#resultadoa').val().length - 2));
-						$('#resultadob').val($('#resultadob').val().substr(0, $('#resultadob').val().length - 2));
+            $.each(uniqueA, function (i, el) {
+                $('#resultadoa').val($('#resultadoa').val() + el + ", ");
+            });
+            $.each(uniqueB, function (i, el) {
+                $('#resultadob').val($('#resultadob').val() + el + ", ");
+            });
+
+            //limpar ultima virgula
+            $('#resultadoa').val($('#resultadoa').val().substr(0, $('#resultadoa').val().length - 2));
+            $('#resultadob').val($('#resultadob').val().substr(0, $('#resultadob').val().length - 2));
         }
     </script>
 
 </body>
+
 </html>
